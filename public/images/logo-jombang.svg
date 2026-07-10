@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Kabupaten Jombang</title>
+  <desc id="desc">Lambang Kabupaten Jombang dengan perisai merah hijau, menara putih, padi kapas, bintang, dan pita Kabupaten Jombang.</desc>
+  <defs>
+    <linearGradient id="shieldShadow" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#000000" stop-opacity=".16"/>
+    </linearGradient>
+    <clipPath id="shieldClip">
+      <path d="M20 6h260v205c0 88-47 155-130 202C67 366 20 299 20 211V6Z"/>
+    </clipPath>
+  </defs>
+
+  <path d="M20 6h260v205c0 88-47 155-130 202C67 366 20 299 20 211V6Z" fill="#0a0a0a"/>
+  <g clip-path="url(#shieldClip)">
+    <path d="M20 6h130v407H20Z" fill="#06a977"/>
+    <path d="M150 6h130v407H150Z" fill="#e00000"/>
+    <circle cx="150" cy="112" r="94" fill="#17bdf6"/>
+    <path d="M0 232h300v181H0Z" fill="#05a85f"/>
+    <path d="M0 232c35 10 58-8 90 1s54 20 90 5 78-10 120 2v173H0Z" fill="#10934f" opacity=".9"/>
+    <path d="M0 250c35 10 58-8 90 1s54 20 90 5 78-10 120 2" fill="none" stroke="#68d984" stroke-width="3"/>
+    <path d="M0 260c35 10 58-8 90 1s54 20 90 5 78-10 120 2" fill="none" stroke="#68d984" stroke-width="3"/>
+  </g>
+
+  <path d="M20 6h260v205c0 88-47 155-130 202C67 366 20 299 20 211V6Z" fill="url(#shieldShadow)" opacity=".5"/>
+
+  <g fill="#3b120b">
+    <path d="M85 104h20v115H85z"/>
+    <path d="M69 128h36v18H69zM56 153h49v18H56zM45 178h60v18H45z"/>
+    <path d="M195 104h20v115h-20z"/>
+    <path d="M195 128h36v18h-36zM195 153h49v18h-49zM195 178h60v18h-60z"/>
+  </g>
+
+  <g fill="#fff" stroke="#fff" stroke-linejoin="round">
+    <path d="M150 86l18 28-12 69h-12l-12-69 18-28Z"/>
+    <path d="M127 181h46l25 30H102l25-30Z"/>
+    <path d="M91 218h118v16H91z"/>
+    <path d="M80 237h140v18H80z"/>
+    <path d="M70 260h160v18H70z"/>
+    <path d="M99 279h102v43H99z"/>
+  </g>
+  <path d="M118 222h64v62h-64z" fill="#006c3f" stroke="#fff" stroke-width="4"/>
+  <path d="M95 286h110v20H95z" fill="#fff"/>
+  <path d="M78 307h144v20H78z" fill="#fff"/>
+  <path d="M104 329h92v29h-92z" fill="#fff"/>
+  <path d="M123 333h54v25h-54z" fill="#b40000"/>
+
+  <path d="M150 31l10 28 30-1-24 17 10 28-26-17-26 17 10-28-24-17 30 1 10-28Z" fill="#ffd84f" stroke="#fff" stroke-width="4"/>
+  <path d="M150 78c12 0 22 10 22 22s-10 22-22 22-22-10-22-22 10-22 22-22Z" fill="#fff"/>
+
+  <g fill="none" stroke="#f8d45c" stroke-linecap="round" stroke-width="7">
+    <path d="M57 278c-37-71-30-142 18-212"/>
+  </g>
+  <g fill="#ffd45b" stroke="#b88718" stroke-width="2">
+    <path d="M69 86c-21 14-25 28-24 45 17-10 25-25 24-45Z"/>
+    <path d="M57 122c-21 14-25 28-24 45 17-10 25-25 24-45Z"/>
+    <path d="M52 160c-19 17-21 31-17 48 15-12 21-28 17-48Z"/>
+    <path d="M55 200c-15 21-14 35-6 50 12-15 15-31 6-50Z"/>
+    <path d="M67 237c-9 24-5 37 7 50 8-17 7-33-7-50Z"/>
+  </g>
+
+  <g fill="#fff" stroke="#d8d8d8" stroke-width="3">
+    <path d="M235 78c26 13 28 36 13 53-10-18-16-32-13-53Z"/>
+    <path d="M244 120c25 11 30 32 17 50-12-15-20-28-17-50Z"/>
+    <path d="M248 160c22 13 26 33 12 49-10-16-17-29-12-49Z"/>
+    <path d="M243 201c18 17 19 37 2 51-7-18-11-33-2-51Z"/>
+    <path d="M228 237c13 22 9 41-10 51-3-19-2-34 10-51Z"/>
+  </g>
+  <g fill="#0bb878">
+    <path d="M234 99h38v12h-38z" transform="rotate(27 253 105)"/>
+    <path d="M239 139h38v12h-38z" transform="rotate(22 258 145)"/>
+    <path d="M241 178h38v12h-38z" transform="rotate(16 260 184)"/>
+    <path d="M232 216h38v12h-38z" transform="rotate(4 251 222)"/>
+  </g>
+
+  <path d="M63 322c55-38 119-38 174 0l-24 56c-38-28-88-28-126 0L63 322Z" fill="#fff" stroke="#d6d6d6" stroke-width="3"/>
+  <path d="M79 331c46-26 96-26 142 0" fill="none" stroke="#e5e5e5" stroke-width="4"/>
+  <text x="150" y="352" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#111" transform="rotate(-8 150 352)">KABUPATEN JOMBANG</text>
+  <path d="M132 376l18-19 18 19M150 357v34" stroke="#56331b" stroke-width="5" stroke-linecap="round"/>
+</svg>
