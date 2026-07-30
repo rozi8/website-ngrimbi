@@ -76,7 +76,7 @@ class AdminController extends Controller
                 'published_at' => ['nullable', 'date'],
             ]);
 
-            News::create(array_merge($data, ['slug' => Str::slug($data['title'])]));
+            News::create(array_merge($data, ['slug' => $this->uniqueNewsSlug($data['title'])]));
         } elseif ($resourceType === 'announcement') {
             $data = $request->validate([
                 'title' => ['required', 'string', 'max:255'],
@@ -134,6 +134,96 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('success', 'Konten berhasil disimpan.');
     }
 
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'resource_type' => ['required', 'in:news,announcement,agenda,ppid,listing,aspiration,emergency'],
+            'resource_id' => ['required', 'integer'],
+        ]);
+
+        if ($validated['resource_type'] === 'news') {
+            $resource = News::findOrFail($validated['resource_id']);
+            $data = $request->validate([
+                'title' => ['required', 'string', 'max:255'],
+                'category' => ['nullable', 'string', 'max:100'],
+                'excerpt' => ['nullable', 'string'],
+                'body' => ['nullable', 'string'],
+                'image_url' => ['nullable', 'url'],
+                'published_at' => ['nullable', 'date'],
+            ]);
+
+            $resource->update(array_merge($data, [
+                'slug' => $this->uniqueNewsSlug($data['title'], $resource->id),
+            ]));
+        } elseif ($validated['resource_type'] === 'announcement') {
+            $resource = Announcement::findOrFail($validated['resource_id']);
+            $data = $request->validate([
+                'title' => ['required', 'string', 'max:255'],
+                'excerpt' => ['nullable', 'string'],
+                'body' => ['nullable', 'string'],
+                'image_url' => ['nullable', 'url'],
+                'published_at' => ['nullable', 'date'],
+            ]);
+
+            $resource->update($data);
+        } elseif ($validated['resource_type'] === 'agenda') {
+            $resource = AgendaEvent::findOrFail($validated['resource_id']);
+            $data = $request->validate([
+                'title' => ['required', 'string', 'max:255'],
+                'location' => ['nullable', 'string', 'max:255'],
+                'event_date' => ['required', 'date'],
+                'time' => ['nullable', 'string', 'max:255'],
+                'description' => ['nullable', 'string'],
+            ]);
+
+            $resource->update($data);
+        } elseif ($validated['resource_type'] === 'ppid') {
+            $resource = PpidDocument::findOrFail($validated['resource_id']);
+            $data = $request->validate([
+                'title' => ['required', 'string', 'max:255'],
+                'category' => ['required', 'string', 'max:100'],
+                'description' => ['nullable', 'string'],
+                'status' => ['nullable', 'string', 'max:50'],
+                'file_url' => ['nullable', 'url'],
+            ]);
+
+            $resource->update(array_merge($data, ['status' => $data['status'] ?? 'Tersedia']));
+        } elseif ($validated['resource_type'] === 'listing') {
+            $resource = Listing::findOrFail($validated['resource_id']);
+            $data = $request->validate([
+                'type' => ['required', 'in:umkm,tourism'],
+                'name' => ['required', 'string', 'max:255'],
+                'category' => ['nullable', 'string', 'max:100'],
+                'description' => ['nullable', 'string'],
+                'image_url' => ['nullable', 'url'],
+                'contact' => ['nullable', 'string', 'max:255'],
+                'location' => ['nullable', 'string', 'max:255'],
+            ]);
+
+            $resource->update($data);
+        } elseif ($validated['resource_type'] === 'aspiration') {
+            $resource = Aspiration::findOrFail($validated['resource_id']);
+            $data = $request->validate([
+                'status' => ['required', 'string', 'max:100'],
+            ]);
+
+            $resource->update($data);
+        } else {
+            $resource = EmergencyVehicle::findOrFail($validated['resource_id']);
+            $data = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'phone' => ['nullable', 'string', 'max:50'],
+                'status' => ['required', 'string', 'max:100'],
+                'notes' => ['nullable', 'string'],
+                'availability' => ['nullable', 'boolean'],
+            ]);
+
+            $resource->update(array_merge($data, ['availability' => $request->boolean('availability')]));
+        }
+
+        return redirect()->route('admin.dashboard')->with('success', 'Konten berhasil diperbarui.');
+    }
+
     public function destroy(Request $request)
     {
         $validated = $request->validate([
@@ -164,5 +254,23 @@ class AdminController extends Controller
         }
 
         return redirect()->route('admin.dashboard')->with('success', 'Konten berhasil dihapus.');
+    }
+
+    private function uniqueNewsSlug(string $title, ?int $ignoreId = null): string
+    {
+        $baseSlug = Str::slug($title) ?: 'berita';
+        $slug = $baseSlug;
+        $counter = 2;
+
+        while (
+            News::where('slug', $slug)
+                ->when($ignoreId, fn ($query) => $query->whereKeyNot($ignoreId))
+                ->exists()
+        ) {
+            $slug = "{$baseSlug}-{$counter}";
+            $counter++;
+        }
+
+        return $slug;
     }
 }
