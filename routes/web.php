@@ -5,9 +5,7 @@ use App\Http\Controllers\PublicPageController;
 use App\Http\Middleware\AdminAuthenticate;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('pages.home.index');
-});
+Route::view('/', 'pages.home.index');
 
 Route::get('/kontak', [PublicPageController::class, 'contact'])->name('contact');
 Route::post('/kontak', [PublicPageController::class, 'submitContact'])->name('contact.submit');
@@ -63,6 +61,6 @@ Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.lo
 Route::middleware([AdminAuthenticate::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::post('/store', [AdminController::class, 'store'])->name('store');
+    Route::post('/update', [AdminController::class, 'update'])->name('update');
     Route::post('/delete', [AdminController::class, 'destroy'])->name('destroy');
 });
-
