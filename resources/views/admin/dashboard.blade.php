@@ -277,6 +277,149 @@
                 </div>
             </div>
 
+            <section class="rounded-3xl border border-slate-200 bg-white p-6">
+                <h2 class="text-xl font-black text-[#101c78]">Edit Cepat Konten</h2>
+                <p class="mt-2 text-sm text-slate-600">Buka salah satu item untuk memperbarui data yang sudah tersimpan.</p>
+
+                <div class="mt-6 grid gap-5 xl:grid-cols-2">
+                    @foreach($news as $item)
+                        <details class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                            <summary class="cursor-pointer text-sm font-black text-slate-900">Berita: {{ $item->title }}</summary>
+                            <form action="{{ route('admin.update') }}" method="post" class="mt-5 space-y-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="news">
+                                <input type="hidden" name="resource_id" value="{{ $item->id }}">
+                                <input type="text" name="title" value="{{ $item->title }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                <input type="text" name="category" value="{{ $item->category }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Kategori">
+                                <textarea name="excerpt" rows="2" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Ringkasan">{{ $item->excerpt }}</textarea>
+                                <textarea name="body" rows="4" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Isi berita">{{ $item->body }}</textarea>
+                                <input type="url" name="image_url" value="{{ $item->image_url }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="URL gambar">
+                                <input type="date" name="published_at" value="{{ $item->published_at?->format('Y-m-d') }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none">
+                                <button type="submit" class="rounded-full bg-[#101c78] px-5 py-2 text-xs font-black text-white">Update</button>
+                            </form>
+                        </details>
+                    @endforeach
+
+                    @foreach($agendaEvents as $event)
+                        <details class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                            <summary class="cursor-pointer text-sm font-black text-slate-900">Agenda: {{ $event->title }}</summary>
+                            <form action="{{ route('admin.update') }}" method="post" class="mt-5 space-y-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="agenda">
+                                <input type="hidden" name="resource_id" value="{{ $event->id }}">
+                                <input type="text" name="title" value="{{ $event->title }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                <input type="date" name="event_date" value="{{ $event->event_date?->format('Y-m-d') }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                <input type="text" name="time" value="{{ $event->time }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Waktu">
+                                <input type="text" name="location" value="{{ $event->location }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Lokasi">
+                                <textarea name="description" rows="3" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Deskripsi">{{ $event->description }}</textarea>
+                                <button type="submit" class="rounded-full bg-[#101c78] px-5 py-2 text-xs font-black text-white">Update</button>
+                            </form>
+                            <form action="{{ route('admin.destroy') }}" method="post" class="mt-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="agenda">
+                                <input type="hidden" name="resource_id" value="{{ $event->id }}">
+                                <button type="submit" class="rounded-full bg-red-100 px-5 py-2 text-xs font-semibold text-red-700">Hapus</button>
+                            </form>
+                        </details>
+                    @endforeach
+
+                    @foreach($announcements as $item)
+                        <details class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                            <summary class="cursor-pointer text-sm font-black text-slate-900">Pengumuman: {{ $item->title }}</summary>
+                            <form action="{{ route('admin.update') }}" method="post" class="mt-5 space-y-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="announcement">
+                                <input type="hidden" name="resource_id" value="{{ $item->id }}">
+                                <input type="text" name="title" value="{{ $item->title }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                <textarea name="excerpt" rows="2" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Ringkasan">{{ $item->excerpt }}</textarea>
+                                <textarea name="body" rows="3" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Isi">{{ $item->body }}</textarea>
+                                <input type="url" name="image_url" value="{{ $item->image_url }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="URL gambar">
+                                <input type="date" name="published_at" value="{{ $item->published_at?->format('Y-m-d') }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none">
+                                <button type="submit" class="rounded-full bg-[#101c78] px-5 py-2 text-xs font-black text-white">Update</button>
+                            </form>
+                            <form action="{{ route('admin.destroy') }}" method="post" class="mt-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="announcement">
+                                <input type="hidden" name="resource_id" value="{{ $item->id }}">
+                                <button type="submit" class="rounded-full bg-red-100 px-5 py-2 text-xs font-semibold text-red-700">Hapus</button>
+                            </form>
+                        </details>
+                    @endforeach
+
+                    @foreach($documents as $doc)
+                        <details class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                            <summary class="cursor-pointer text-sm font-black text-slate-900">PPID: {{ $doc->title }}</summary>
+                            <form action="{{ route('admin.update') }}" method="post" class="mt-5 space-y-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="ppid">
+                                <input type="hidden" name="resource_id" value="{{ $doc->id }}">
+                                <input type="text" name="title" value="{{ $doc->title }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                <select name="category" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                    <option value="berkala" @selected($doc->category === 'berkala')>Berkala</option>
+                                    <option value="serta-merta" @selected($doc->category === 'serta-merta')>Serta Merta</option>
+                                    <option value="setiap-saat" @selected($doc->category === 'setiap-saat')>Setiap Saat</option>
+                                    <option value="dikecualikan" @selected($doc->category === 'dikecualikan')>Dikecualikan</option>
+                                </select>
+                                <input type="text" name="status" value="{{ $doc->status }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Status">
+                                <textarea name="description" rows="3" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Deskripsi">{{ $doc->description }}</textarea>
+                                <input type="url" name="file_url" value="{{ $doc->file_url }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="URL file">
+                                <button type="submit" class="rounded-full bg-[#101c78] px-5 py-2 text-xs font-black text-white">Update</button>
+                            </form>
+                        </details>
+                    @endforeach
+
+                    @foreach($listings as $listing)
+                        <details class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                            <summary class="cursor-pointer text-sm font-black text-slate-900">Daftar: {{ $listing->name }}</summary>
+                            <form action="{{ route('admin.update') }}" method="post" class="mt-5 space-y-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="listing">
+                                <input type="hidden" name="resource_id" value="{{ $listing->id }}">
+                                <select name="type" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                    <option value="umkm" @selected($listing->type === 'umkm')>UMKM</option>
+                                    <option value="tourism" @selected($listing->type === 'tourism')>Destinasi Wisata</option>
+                                </select>
+                                <input type="text" name="name" value="{{ $listing->name }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                <input type="text" name="category" value="{{ $listing->category }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Kategori">
+                                <textarea name="description" rows="3" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Deskripsi">{{ $listing->description }}</textarea>
+                                <input type="url" name="image_url" value="{{ $listing->image_url }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="URL gambar">
+                                <input type="text" name="contact" value="{{ $listing->contact }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Kontak">
+                                <input type="text" name="location" value="{{ $listing->location }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Lokasi">
+                                <button type="submit" class="rounded-full bg-[#101c78] px-5 py-2 text-xs font-black text-white">Update</button>
+                            </form>
+                        </details>
+                    @endforeach
+
+                    @foreach($emergencyVehicles as $vehicle)
+                        <details class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                            <summary class="cursor-pointer text-sm font-black text-slate-900">Mobil Siaga: {{ $vehicle->name }}</summary>
+                            <form action="{{ route('admin.update') }}" method="post" class="mt-5 space-y-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="emergency">
+                                <input type="hidden" name="resource_id" value="{{ $vehicle->id }}">
+                                <input type="text" name="name" value="{{ $vehicle->name }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                <input type="text" name="status" value="{{ $vehicle->status }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" required>
+                                <input type="text" name="phone" value="{{ $vehicle->phone }}" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Telepon">
+                                <textarea name="notes" rows="3" class="w-full rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none" placeholder="Keterangan">{{ $vehicle->notes }}</textarea>
+                                <label class="inline-flex items-center gap-3 text-sm font-semibold text-slate-700">
+                                    <input type="checkbox" name="availability" value="1" class="h-5 w-5 rounded border-slate-300 text-[#101c78] focus:ring-[#101c78]" @checked($vehicle->availability)>
+                                    Tersedia saat ini
+                                </label>
+                                <div>
+                                    <button type="submit" class="rounded-full bg-[#101c78] px-5 py-2 text-xs font-black text-white">Update</button>
+                                </div>
+                            </form>
+                            <form action="{{ route('admin.destroy') }}" method="post" class="mt-3">
+                                @csrf
+                                <input type="hidden" name="resource_type" value="emergency">
+                                <input type="hidden" name="resource_id" value="{{ $vehicle->id }}">
+                                <button type="submit" class="rounded-full bg-red-100 px-5 py-2 text-xs font-semibold text-red-700">Hapus</button>
+                            </form>
+                        </details>
+                    @endforeach
+                </div>
+            </section>
+
             <div class="space-y-6">
                 <section class="rounded-3xl border border-slate-200 bg-white p-6">
                     <div class="flex items-center justify-between gap-4">
@@ -305,7 +448,20 @@
                                         </form>
                                     </div>
                                     <p class="mt-4 text-sm text-slate-700">{{ $aspiration->message }}</p>
-                                    <p class="mt-4 text-xs font-semibold text-slate-500">Dikirim pada {{ $aspiration->created_at->format('d M Y H:i') }}</p>
+                                    <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                                        <p class="text-xs font-semibold text-slate-500">Dikirim pada {{ $aspiration->created_at->format('d M Y H:i') }} &middot; Status: {{ $aspiration->status }}</p>
+                                        <form action="{{ route('admin.update') }}" method="post" class="flex flex-wrap items-center gap-2">
+                                            @csrf
+                                            <input type="hidden" name="resource_type" value="aspiration">
+                                            <input type="hidden" name="resource_id" value="{{ $aspiration->id }}">
+                                            <select name="status" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700">
+                                                <option value="new" @selected($aspiration->status === 'new')>Baru</option>
+                                                <option value="diproses" @selected($aspiration->status === 'diproses')>Diproses</option>
+                                                <option value="selesai" @selected($aspiration->status === 'selesai')>Selesai</option>
+                                            </select>
+                                            <button type="submit" class="rounded-full bg-[#101c78] px-4 py-2 text-xs font-black text-white">Update Status</button>
+                                        </form>
+                                    </div>
                                 </article>
                             @endforeach
                         </div>
